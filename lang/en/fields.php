@@ -12,4 +12,5 @@ return [
     'megjegyzes' => 'Comment',
     'inaktiv' => 'Inactive',
     'all' => 'All',
+    'created_at' => 'Created at',
 ];

@@ -12,4 +12,5 @@ return [
     'megjegyzes' => 'Megjegyzés',
     'inaktiv' => 'Inaktív',
     'all' => 'Mind',
+    'created_at' => 'Létrehozva',
 ];

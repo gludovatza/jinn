@@ -88,7 +88,7 @@ class DeviceResource extends Resource
                     ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('type.nev')->label(__('fields.type'))
                     ->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_at')->label(__('fields.created_at'))
                     ->dateTime('Y. m. d. H:i')
                     ->searchable()->sortable(),
             ])
