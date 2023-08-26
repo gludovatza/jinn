@@ -81,11 +81,15 @@ class DeviceResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('nev')->label(__('fields.nev'))
                     ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('bpkod')->label(__('fields.bpkod'))
                     ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('type.nev')->label(__('fields.type'))
+                    ->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime('Y. m. d. H:i')
                     ->searchable()->sortable(),
             ])
             ->filters([

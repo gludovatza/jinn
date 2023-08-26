@@ -69,9 +69,13 @@ class DocumentResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('nev')->label(__('fields.nev'))
                     ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('device.nev')->label(__('module_names.devices.label'))
+                    ->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime('Y. m. d. H:i')
                     ->searchable()->sortable(),
             ])
             ->filters([
