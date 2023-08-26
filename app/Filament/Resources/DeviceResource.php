@@ -22,6 +22,11 @@ class DeviceResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static function getNavigationGroup(): string
+    {
+        return __('module_names.navigation_groups.administration');
+    }
+
     public static function getModelLabel(): string
     {
         return __('module_names.devices.label');
@@ -38,9 +43,11 @@ class DeviceResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
                     ->required()
+                    ->unique()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('bpkod')->label(__('fields.bpkod'))
                     ->required()
+                    ->unique()
                     ->maxLength(255),
                 Forms\Components\Select::make('type_id')->label(__('fields.type'))
                     ->relationship('type', 'nev')
@@ -53,6 +60,7 @@ class DeviceResource extends Resource
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('movexkod')->label(__('fields.movexkod'))
+                    ->unique()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('uzem')->label(__('fields.uzem'))
                     ->required()

@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('device_types', function (Blueprint $table) {
+        Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->string('nev')->unique();
-            $table->string('megjegyzes')->nullable();
+            $table->foreignId('device_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->text('attachment');
+            // $table->string('type');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('device_types');
+        Schema::dropIfExists('documents');
     }
 };

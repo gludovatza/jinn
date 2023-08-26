@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->string('nev');
+            $table->string('nev')->unique();
             $table->string('bpkod')->unique();
             $table->foreignId('type_id')->constrained('device_types')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('movexkod')->nullable();
+            $table->string('movexkod')->unique()->nullable();
             $table->string('uzem');
             $table->string('uzemterulet')->nullable();
             $table->boolean('aktiv')->default(false);

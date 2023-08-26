@@ -21,6 +21,11 @@ class DeviceTypeResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    public static function getNavigationGroup(): string
+    {
+        return __('module_names.navigation_groups.administration');
+    }
+
     public static function getModelLabel(): string
     {
         return __('module_names.device_types.label');
@@ -44,6 +49,7 @@ class DeviceTypeResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
                     ->required()
+                    ->unique()
                     ->maxLength(255),
             ]);
     }
