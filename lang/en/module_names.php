@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'navigation_groups' => [
+        'administration' => 'Administration',
+        'failure_report' => 'Failure report',
+        'maintenance' => 'Maintenance',
+    ],
     'device_types' => [
         'label' => 'Device type',
         'plural_label' => 'Device types',
