@@ -6,8 +6,8 @@ return [
         'plural_label' => 'Berendezés típusok',
     ],
     'devices' => [
-        'label' => 'Eszköz',
-        'plural_label' => 'Eszközök',
+        'label' => 'Berendezés',
+        'plural_label' => 'Berendezések',
     ],
     'documents' => [
         'label' => 'Dokumentum',
