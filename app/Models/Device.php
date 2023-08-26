@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 class Device extends Model
@@ -10,4 +11,9 @@ class Device extends Model
     use HasFactory;
 
     protected $guard = ['id', 'created_at', 'updated_at'];
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(DeviceType::class);
+    }
 }
