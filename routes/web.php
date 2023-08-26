@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Filament admin provider-ben a path-ban állítottam be, hogy az üres path legyen az admin főoldala
+// Route::get('/', function () {
+//     // return view('welcome');
+//     return redirect(route('filament.admin.pages.dashboard'));
+// });
+
+// Route::get('download/{document}', [DocumentController::class, 'download']);
