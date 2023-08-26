@@ -23,9 +23,13 @@ class Device extends Model
         'megjegyzes'
     ];
 
+    protected $casts = [
+        'aktiv' => 'boolean',
+    ];
+
     public function type(): BelongsTo
     {
-        return $this->belongsTo(DeviceType::class);
+        return $this->belongsTo(DeviceType::class, 'type_id');
     }
 
     public function documents(): HasMany

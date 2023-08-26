@@ -12,12 +12,15 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Toggle;
 
 class DeviceResource extends Resource
 {
     protected static ?string $model = Device::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-wrench';
+
+    protected static ?int $navigationSort = 2;
 
     public static function getModelLabel(): string
     {
@@ -56,7 +59,9 @@ class DeviceResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('uzemterulet')->label(__('fields.uzemterulet'))
                     ->maxLength(255),
-
+                Toggle::make('aktiv')->label(__('fields.aktiv'))
+                    ->onColor('success')
+                    ->offColor('danger'),
                 Forms\Components\TextInput::make('tortenet')->label(__('fields.tortenet'))
                     ->maxLength(255),
                 Forms\Components\TextInput::make('megjegyzes')->label(__('fields.megjegyzes'))
@@ -69,11 +74,11 @@ class DeviceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nev')->label(__('fields.nev'))
-                ->searchable()->sortable(),
+                    ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('bpkod')->label(__('fields.bpkod'))
-                ->searchable()->sortable(),
+                    ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('type.nev')->label(__('fields.type'))
-                ->searchable()->sortable(),
+                    ->searchable()->sortable(),
             ])
             ->filters([
                 //
