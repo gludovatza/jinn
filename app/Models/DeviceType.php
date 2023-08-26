@@ -10,7 +10,7 @@ class DeviceType extends Model
 {
     use HasFactory;
 
-    protected $guard = ['id', 'created_at', 'updated_at'];
+    protected $fillable = ['nev'];
 
     public function devices(): HasMany
     {
