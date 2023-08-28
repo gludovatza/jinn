@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -77,7 +78,15 @@ class DocumentsRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('download')
+                    ->label(__('actions.download'))
+                    ->action(function ($record) {
+                        return Storage::download('public/'. $record->attachment);
+                    })
+                    ->tooltip(__('actions.download'))
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('primary'),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
