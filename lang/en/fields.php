@@ -13,4 +13,5 @@ return [
     'inaktiv' => 'Inactive',
     'all' => 'All',
     'created_at' => 'Created at',
+    'attachment' => 'Attachment',
 ];

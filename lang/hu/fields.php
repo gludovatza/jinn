@@ -13,4 +13,5 @@ return [
     'inaktiv' => 'Inaktív',
     'all' => 'Mind',
     'created_at' => 'Létrehozva',
+    'attachment' => 'Csatolt fájl',
 ];

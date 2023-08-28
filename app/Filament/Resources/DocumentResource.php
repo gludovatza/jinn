@@ -52,7 +52,7 @@ class DocumentResource extends Resource
                     ->preload()
 
                     ->required(),
-                FileUpload::make('attachment')
+                FileUpload::make('attachment')->label(__('fields.attachment'))
                     ->required()
                     ->preserveFilenames()
                     ->openable()
