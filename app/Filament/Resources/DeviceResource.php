@@ -37,6 +37,13 @@ class DeviceResource extends Resource
         return __('module_names.devices.plural_label');
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\DocumentsRelationManager::class,
+        ];
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -69,7 +76,8 @@ class DeviceResource extends Resource
                     ->maxLength(255),
                 Toggle::make('aktiv')->label(__('fields.aktiv'))
                     ->onColor('success')
-                    ->offColor('danger'),
+                    ->offColor('danger')
+                    ->columnSpan('full'),
                 Forms\Components\TextInput::make('tortenet')->label(__('fields.tortenet'))
                     ->maxLength(255),
                 Forms\Components\TextInput::make('megjegyzes')->label(__('fields.megjegyzes'))
@@ -96,6 +104,7 @@ class DeviceResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -108,19 +117,13 @@ class DeviceResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListDevices::route('/'),
             'create' => Pages\CreateDevice::route('/create'),
             'edit' => Pages\EditDevice::route('/{record}/edit'),
+            'view' => Pages\ViewDevice::route('/{record}'),
         ];
     }
 }

@@ -9,6 +9,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Toggle;
 
 class DevicesRelationManager extends RelationManager
 {
@@ -18,6 +19,8 @@ class DevicesRelationManager extends RelationManager
     {
         return __('module_names.devices.label');
     }
+
+    protected static ?string $title = 'Berendezések';
 
     public static function getPluralModelLabel(): string
     {
@@ -30,6 +33,37 @@ class DevicesRelationManager extends RelationManager
             ->schema([
                 Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
                     ->required()
+                    ->unique()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('bpkod')->label(__('fields.bpkod'))
+                    ->required()
+                    ->unique()
+                    ->maxLength(255),
+                Forms\Components\Select::make('type_id')->label(__('fields.type'))
+                    ->relationship('type', 'nev')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
+                            ->required()
+                            ->maxLength(255)
+                    ])
+                    ->required(),
+                Forms\Components\TextInput::make('movexkod')->label(__('fields.movexkod'))
+                    ->unique()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('uzem')->label(__('fields.uzem'))
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('uzemterulet')->label(__('fields.uzemterulet'))
+                    ->maxLength(255),
+                Toggle::make('aktiv')->label(__('fields.aktiv'))
+                    ->onColor('success')
+                    ->offColor('danger')
+                    ->columnSpan('full'),
+                Forms\Components\TextInput::make('tortenet')->label(__('fields.tortenet'))
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('megjegyzes')->label(__('fields.megjegyzes'))
                     ->maxLength(255),
             ]);
     }
@@ -48,8 +82,8 @@ class DevicesRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

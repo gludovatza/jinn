@@ -36,12 +36,12 @@ class DeviceTypeResource extends Resource
         return __('module_names.device_types.plural_label');
     }
 
-    // public static function getRelations(): array
-    // {
-    //     return [
-    //         RelationManagers\DevicesRelationManager::class,
-    //     ];
-    // }
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\DevicesRelationManager::class,
+        ];
+    }
 
     public static function form(Form $form): Form
     {
