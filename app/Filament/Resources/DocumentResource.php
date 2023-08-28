@@ -2,18 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DocumentResource\Pages;
-use App\Filament\Resources\DocumentResource\RelationManagers;
-use App\Models\Document;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Document;
+use Filament\Forms\Form;
+use Illuminate\View\View;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\FileUpload;
+use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Storage;
+use Filament\Forms\Components\FileUpload;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\DocumentResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\DocumentResource\RelationManagers;
 
 class DocumentResource extends Resource
 {
@@ -82,6 +83,7 @@ class DocumentResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 // Tables\Actions\Action::make('exportAsJson')
                 //     ->label(__('Export'))
@@ -103,6 +105,10 @@ class DocumentResource extends Resource
                     ->tooltip(__('actions.download'))
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('primary'),
+                Tables\Actions\Action::make('QR')->label('QR kód')
+                    ->modalContent(fn ($record): View => view('filament.resources.document-resource.pages.q-r-document', ['record' => $record]))
+                    ->modalSubmitAction(false)
+                    ->modalCancelAction(false)
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -126,7 +132,9 @@ class DocumentResource extends Resource
         return [
             'index' => Pages\ListDocuments::route('/'),
             'create' => Pages\CreateDocument::route('/create'),
+            'qr' => Pages\QRDocument::route('/qr/{record}'),
             'edit' => Pages\EditDocument::route('/{record}/edit'),
+            'view' => Pages\ViewDocument::route('/{record}'),
         ];
     }
 }
