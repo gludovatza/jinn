@@ -40,7 +40,7 @@ class PermissionResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
+                TextInput::make('name')->label(__('fields.nev'))
                     ->unique()
                     ->required()
             ]);
