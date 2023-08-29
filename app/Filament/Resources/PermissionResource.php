@@ -7,6 +7,7 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Spatie\Permission\Models\Permission;
@@ -40,10 +41,13 @@ class PermissionResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->label(__('fields.nev'))
-                    ->unique()
-                    ->required()
-            ]);
+                Section::make()
+                    ->schema([
+                        TextInput::make('name')->label(__('fields.nev'))
+                            ->unique()
+                            ->required()
+                    ])
+        ]);
     }
 
     public static function table(Table $table): Table

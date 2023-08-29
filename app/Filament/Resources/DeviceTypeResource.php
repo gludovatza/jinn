@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DeviceTypeResource\Pages;
-use App\Filament\Resources\DeviceTypeResource\RelationManagers;
-use App\Models\DeviceType;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\DeviceType;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\DeviceTypeResource\Pages;
+use App\Filament\Resources\DeviceTypeResource\RelationManagers;
 
 class DeviceTypeResource extends Resource
 {
@@ -45,13 +46,15 @@ class DeviceTypeResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
-                    ->required()
-                    ->unique()
-                    ->maxLength(255),
-            ]);
+        return $form->schema([
+            Section::make()
+                ->schema([
+                    Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
+                        ->required()
+                        ->unique()
+                        ->maxLength(255),
+                ])
+        ]);
     }
 
     public static function table(Table $table): Table

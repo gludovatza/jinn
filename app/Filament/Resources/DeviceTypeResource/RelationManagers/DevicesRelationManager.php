@@ -3,13 +3,14 @@
 namespace App\Filament\Resources\DeviceTypeResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\Toggle;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class DevicesRelationManager extends RelationManager
 {
@@ -31,40 +32,43 @@ class DevicesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
-                    ->required()
-                    ->unique()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('bpkod')->label(__('fields.bpkod'))
-                    ->required()
-                    ->unique()
-                    ->maxLength(255),
-                Forms\Components\Select::make('type_id')->label(__('fields.type'))
-                    ->relationship('type', 'nev')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
+                Section::make()
+                    ->schema([
                         Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
                             ->required()
-                            ->maxLength(255)
+                            ->unique()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('bpkod')->label(__('fields.bpkod'))
+                            ->required()
+                            ->unique()
+                            ->maxLength(255),
+                        Forms\Components\Select::make('type_id')->label(__('fields.type'))
+                            ->relationship('type', 'nev')
+                            ->searchable()
+                            ->preload()
+                            ->createOptionForm([
+                                Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
+                                    ->required()
+                                    ->maxLength(255)
+                            ])
+                            ->required(),
+                        Forms\Components\TextInput::make('movexkod')->label(__('fields.movexkod'))
+                            ->unique()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('uzem')->label(__('fields.uzem'))
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('uzemterulet')->label(__('fields.uzemterulet'))
+                            ->maxLength(255),
+                        Toggle::make('aktiv')->label(__('fields.aktiv'))
+                            ->onColor('success')
+                            ->offColor('danger')
+                            ->columnSpan('full'),
+                        Forms\Components\TextInput::make('tortenet')->label(__('fields.tortenet'))
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('megjegyzes')->label(__('fields.megjegyzes'))
+                            ->maxLength(255),
                     ])
-                    ->required(),
-                Forms\Components\TextInput::make('movexkod')->label(__('fields.movexkod'))
-                    ->unique()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('uzem')->label(__('fields.uzem'))
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('uzemterulet')->label(__('fields.uzemterulet'))
-                    ->maxLength(255),
-                Toggle::make('aktiv')->label(__('fields.aktiv'))
-                    ->onColor('success')
-                    ->offColor('danger')
-                    ->columnSpan('full'),
-                Forms\Components\TextInput::make('tortenet')->label(__('fields.tortenet'))
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('megjegyzes')->label(__('fields.megjegyzes'))
-                    ->maxLength(255),
             ]);
     }
 

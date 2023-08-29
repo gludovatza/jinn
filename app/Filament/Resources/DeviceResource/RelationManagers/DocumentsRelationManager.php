@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Forms\Components\Section;
 use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
@@ -40,26 +41,29 @@ class DocumentsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
-                    ->required()
-                    ->unique()
-                    ->maxLength(255),
-                Forms\Components\Select::make('device_id')->label(__('module_names.devices.label'))
-                    ->relationship('device', 'nev')
-                    ->searchable()
-                    ->preload()
+                Section::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
+                            ->required()
+                            ->unique()
+                            ->maxLength(255),
+                        Forms\Components\Select::make('device_id')->label(__('module_names.devices.label'))
+                            ->relationship('device', 'nev')
+                            ->searchable()
+                            ->preload()
 
-                    ->required(),
-                FileUpload::make('attachment')->label(__('fields.attachment'))
-                    ->required()
-                    ->preserveFilenames()
-                    ->openable()
-                    ->downloadable()
-                    ->maxSize(20000),
-                // ->afterStateUpdated(fn (callable $set, callable $get) => $set('type', $get('video')->getMimeType())),
+                            ->required(),
+                        FileUpload::make('attachment')->label(__('fields.attachment'))
+                            ->required()
+                            ->preserveFilenames()
+                            ->openable()
+                            ->downloadable()
+                            ->maxSize(20000),
+                        // ->afterStateUpdated(fn (callable $set, callable $get) => $set('type', $get('video')->getMimeType())),
 
-                // Forms\Components\TextInput::make('type')
-                //     ->maxLength(25),
+                        // Forms\Components\TextInput::make('type')
+                        //     ->maxLength(25),
+                    ])
             ]);
     }
 
@@ -81,7 +85,7 @@ class DocumentsRelationManager extends RelationManager
                 Tables\Actions\Action::make('download')
                     ->label(__('actions.download'))
                     ->action(function ($record) {
-                        return Storage::download('public/'. $record->attachment);
+                        return Storage::download('public/' . $record->attachment);
                     })
                     ->tooltip(__('actions.download'))
                     ->icon('heroicon-o-document-arrow-down')
