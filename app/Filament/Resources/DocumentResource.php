@@ -76,7 +76,7 @@ class DocumentResource extends Resource
                 Tables\Columns\TextColumn::make('device.nev')->label(__('module_names.devices.label'))
                     ->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label(__('fields.created_at'))
-                    ->dateTime('Y. m. d. H:i')
+                    ->dateTime('Y-m-d H:i')
                     ->searchable()->sortable(),
             ])
             ->filters([
