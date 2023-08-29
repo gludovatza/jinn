@@ -14,4 +14,7 @@ return [
     'all' => 'All',
     'created_at' => 'Created at',
     'attachment' => 'Attachment',
+    'email' => 'Email',
+    'password' => 'Password',
+    'new_password' => 'New Password',
 ];

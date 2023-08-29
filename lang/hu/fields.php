@@ -14,4 +14,7 @@ return [
     'all' => 'Mind',
     'created_at' => 'Létrehozva',
     'attachment' => 'Csatolt fájl',
+    'email' => 'E-mail',
+    'password' => 'Jelszó',
+    'new_password' => 'Új jelszó',
 ];

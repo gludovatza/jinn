@@ -17,6 +17,7 @@ use App\Filament\Resources\RoleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RoleResource\RelationManagers;
 use App\Filament\Resources\RoleResource\RelationManagers\PermissionsRelationManager;
+use App\Filament\Resources\RoleResource\RelationManagers\UsersRelationManager;
 
 class RoleResource extends Resource
 {
@@ -93,6 +94,7 @@ class RoleResource extends Resource
     {
         return [
             PermissionsRelationManager::class,
+            UsersRelationManager::class,
         ];
     }
 
