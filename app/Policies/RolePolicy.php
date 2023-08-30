@@ -13,7 +13,7 @@ class RolePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('read roles');
+        return $user->can('read roles');
     }
 
     // /**
@@ -29,7 +29,7 @@ class RolePolicy
      */
     public function create(User $user): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('create roles');
+        return $user->can('create roles');
     }
 
     /**
@@ -37,7 +37,7 @@ class RolePolicy
      */
     public function update(User $user, Role $role): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('update roles');
+        return $user->can('update roles');
     }
 
     /**
@@ -45,7 +45,7 @@ class RolePolicy
      */
     public function delete(User $user, Role $role): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('delete roles');
+        return $user->can('delete roles');
     }
 
     // /**

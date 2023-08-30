@@ -13,7 +13,7 @@ class DevicePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('read devices');
+        return $user->can('read devices');
     }
 
     // /**
@@ -29,7 +29,7 @@ class DevicePolicy
      */
     public function create(User $user): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('create devices');
+        return $user->can('create devices');
     }
 
     /**
@@ -37,7 +37,7 @@ class DevicePolicy
      */
     public function update(User $user, Device $device): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('update devices');
+        return $user->can('update devices');
     }
 
     /**
@@ -45,7 +45,7 @@ class DevicePolicy
      */
     public function delete(User $user, Device $device): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('delete devices');
+        return $user->can('delete devices');
     }
 
     // /**

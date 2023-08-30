@@ -12,7 +12,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('read users');
+        return $user->can('read users');
     }
 
     // /**
@@ -28,7 +28,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('create users');
+        return $user->can('create users');
     }
 
     /**
@@ -36,7 +36,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('update users');
+        return $user->can('update users');
     }
 
     /**
@@ -44,7 +44,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('delete users');
+        return $user->can('delete users');
     }
 
     /**
@@ -52,7 +52,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('restore users');
+        return $user->can('restore users');
     }
 
     /**
@@ -60,6 +60,6 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('forcedelete users');
+        return $user->can('forcedelete users');
     }
 }

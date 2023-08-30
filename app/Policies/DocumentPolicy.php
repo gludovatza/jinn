@@ -13,7 +13,7 @@ class DocumentPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('read documents');
+        return $user->can('read documents');
     }
 
     // /**
@@ -29,7 +29,7 @@ class DocumentPolicy
      */
     public function create(User $user): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('create documents');
+        return $user->can('create documents');
     }
 
     /**
@@ -37,7 +37,7 @@ class DocumentPolicy
      */
     public function update(User $user, Document $document): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('update documents');
+        return $user->can('update documents');
     }
 
     /**
@@ -45,7 +45,7 @@ class DocumentPolicy
      */
     public function delete(User $user, Document $document): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('delete documents');
+        return $user->can('delete documents');
     }
 
     // /**

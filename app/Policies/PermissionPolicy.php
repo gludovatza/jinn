@@ -15,7 +15,7 @@ class PermissionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('read permissions');
+        return $user->can('read permissions');
     }
 
     // /**
@@ -31,7 +31,7 @@ class PermissionPolicy
      */
     public function create(User $user): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('create permissions');
+        return $user->can('create permissions');
     }
 
     /**
@@ -39,7 +39,7 @@ class PermissionPolicy
      */
     public function update(User $user, Permission $permission): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('update permissions');
+        return $user->can('update permissions');
     }
 
     /**
@@ -47,7 +47,7 @@ class PermissionPolicy
      */
     public function delete(User $user, Permission $permission): bool
     {
-        return $user->getPermissionsViaRoles()->pluck('name')->contains('delete permissions');
+        return $user->can('delete permissions');
     }
 
     // /**
