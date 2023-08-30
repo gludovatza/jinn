@@ -13,7 +13,7 @@ class DeviceTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('admin');
+        return $user->getPermissionsViaRoles()->pluck('name')->contains('read devicetypes');
     }
 
     // /**
@@ -29,7 +29,7 @@ class DeviceTypePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('admin');
+        return $user->getPermissionsViaRoles()->pluck('name')->contains('create devicetypes');
     }
 
     /**
@@ -37,7 +37,7 @@ class DeviceTypePolicy
      */
     public function update(User $user, DeviceType $deviceType): bool
     {
-        return $user->hasRole('admin');
+        return $user->getPermissionsViaRoles()->pluck('name')->contains('update devicetypes');
     }
 
     /**
@@ -45,7 +45,7 @@ class DeviceTypePolicy
      */
     public function delete(User $user, DeviceType $deviceType): bool
     {
-        return $user->hasRole('admin');
+        return $user->getPermissionsViaRoles()->pluck('name')->contains('delete devicetypes');
     }
 
     // /**

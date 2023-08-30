@@ -13,7 +13,7 @@ class DevicePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyRole(['admin', 'karbantartó', 'gépkezelő']);
+        return $user->getPermissionsViaRoles()->pluck('name')->contains('read devices');
     }
 
     // /**
@@ -29,7 +29,7 @@ class DevicePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('admin');
+        return $user->getPermissionsViaRoles()->pluck('name')->contains('create devices');
     }
 
     /**
@@ -37,7 +37,7 @@ class DevicePolicy
      */
     public function update(User $user, Device $device): bool
     {
-        return $user->hasRole('admin');
+        return $user->getPermissionsViaRoles()->pluck('name')->contains('update devices');
     }
 
     /**
@@ -45,7 +45,7 @@ class DevicePolicy
      */
     public function delete(User $user, Device $device): bool
     {
-        return $user->hasRole('admin');
+        return $user->getPermissionsViaRoles()->pluck('name')->contains('delete devices');
     }
 
     // /**
