@@ -36,4 +36,9 @@ class Device extends Model
     {
         return $this->hasMany(Document::class);
     }
+
+    public function worksheets(): HasMany
+    {
+        return $this->hasMany(Worksheet::class);
+    }
 }
