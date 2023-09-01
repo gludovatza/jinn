@@ -18,6 +18,10 @@ return [
         'label' => 'Document',
         'plural_label' => 'Documents',
     ],
+    'worksheets' => [
+        'label' => 'Worksheet',
+        'plural_label' => 'Worksheets',
+    ],
 
     'permissions' => [
         'label' => 'Permission',

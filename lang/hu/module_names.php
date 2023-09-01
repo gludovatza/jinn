@@ -18,6 +18,10 @@ return [
         'label' => 'Dokumentum',
         'plural_label' => 'Dokumentumok',
     ],
+    'worksheets' => [
+        'label' => 'Munkalap',
+        'plural_label' => 'Munkalapok',
+    ],
 
     'permissions' => [
         'label' => 'Jogosultság',
