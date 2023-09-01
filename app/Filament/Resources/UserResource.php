@@ -78,13 +78,15 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')->label(__('fields.nev'))
-                    ->searchable(),
+                    ->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')->label(__('module_names.roles.label'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
+                    ->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('Y-m-d H:i')
                     ->sortable()
