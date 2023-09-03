@@ -16,6 +16,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Filament\Resources\DeviceResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\DeviceResource\RelationManagers;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class DeviceResource extends Resource
 {
@@ -23,7 +24,7 @@ class DeviceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-wrench';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 5;
 
     public static function getNavigationGroup(): string
     {
@@ -44,6 +45,7 @@ class DeviceResource extends Resource
     {
         return [
             RelationManagers\DocumentsRelationManager::class,
+            RelationManagers\WorksheetsRelationManager::class,
         ];
     }
 

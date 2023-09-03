@@ -27,6 +27,8 @@ class PermissionResource extends Resource
         return __('module_names.navigation_groups.administration');
     }
 
+    protected static ?int $navigationSort = 2;
+
     public static function getModelLabel(): string
     {
         return __('module_names.permissions.label');

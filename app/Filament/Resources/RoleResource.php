@@ -23,12 +23,14 @@ class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cog';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function getNavigationGroup(): string
     {
         return __('module_names.navigation_groups.administration');
     }
+
+    protected static ?int $navigationSort = 1;
 
     public static function getModelLabel(): string
     {
