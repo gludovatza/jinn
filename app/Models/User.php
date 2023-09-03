@@ -56,6 +56,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function worksheets(): HasMany
     {
-        return $this->hasMany(Worksheet::class);
+        return $this->hasMany(Worksheet::class, 'creator_id');
     }
 }

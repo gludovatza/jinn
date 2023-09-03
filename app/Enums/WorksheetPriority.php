@@ -25,17 +25,17 @@ enum WorksheetPriority: string implements HasLabel, HasColor, HasIcon
     {
         return match ($this) {
             self::NORMAL => 'gray',
-            self::SURGOS => 'warning',
-            self::LEALLASKOR => 'success',
+            self::SURGOS => 'danger',
+            self::LEALLASKOR => 'warning',
         };
     }
 
     public function getIcon(): ?string
     {
         return match ($this) {
-            self::NORMAL => 'heroicon-m-pencil',
-            self::SURGOS => 'heroicon-m-eye',
-            self::LEALLASKOR => 'heroicon-m-check',
+            self::NORMAL => 'heroicon-m-exclamation-circle',
+            self::SURGOS => 'heroicon-m-exclamation-triangle',
+            self::LEALLASKOR => 'heroicon-m-sun',
         };
     }
 }
