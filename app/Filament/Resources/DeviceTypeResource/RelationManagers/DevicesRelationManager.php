@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Contracts\View\View;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
 use Illuminate\Database\Eloquent\Builder;
@@ -88,6 +89,10 @@ class DevicesRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('QR')->label('QR kód')
+                    ->modalContent(fn ($record): View => view('filament.resources.device-resource.pages.q-r-device', ['record' => $record]))
+                    ->modalSubmitAction(false)
+                    ->modalCancelAction(false)
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -3,12 +3,14 @@
 namespace App\Filament\Resources\RoleResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\UserResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class UsersRelationManager extends RelationManager
 {
@@ -47,10 +49,10 @@ class UsersRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->url(fn (): string => UserResource::getUrl('create')),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->url(fn (Model $record): string => UserResource::getUrl('edit', ['record' => $record])),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -59,7 +61,7 @@ class UsersRelationManager extends RelationManager
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->url(fn (): string => UserResource::getUrl('create')),
             ]);
     }
 }

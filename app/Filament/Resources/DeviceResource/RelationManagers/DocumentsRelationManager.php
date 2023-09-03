@@ -7,9 +7,11 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Section;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\DocumentResource;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
 
@@ -41,29 +43,7 @@ class DocumentsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Section::make()
-                    ->schema([
-                        Forms\Components\TextInput::make('nev')->label(__('fields.nev'))
-                            ->required()
-                            ->unique()
-                            ->maxLength(255),
-                        Forms\Components\Select::make('device_id')->label(__('module_names.devices.label'))
-                            ->relationship('device', 'nev')
-                            ->searchable()
-                            ->preload()
 
-                            ->required(),
-                        FileUpload::make('attachment')->label(__('fields.attachment'))
-                            ->required()
-                            ->preserveFilenames()
-                            ->openable()
-                            ->downloadable()
-                            ->maxSize(20000),
-                        // ->afterStateUpdated(fn (callable $set, callable $get) => $set('type', $get('video')->getMimeType())),
-
-                        // Forms\Components\TextInput::make('type')
-                        //     ->maxLength(25),
-                    ])
             ]);
     }
 
@@ -72,16 +52,16 @@ class DocumentsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('nev')
             ->columns([
-                Tables\Columns\TextColumn::make('nev'),
+                Tables\Columns\TextColumn::make('nev')->label(__('fields.nev')),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->url(fn (): string => DocumentResource::getUrl('create')),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->url(fn (Model $record): string => DocumentResource::getUrl('edit', ['record' => $record])),
                 Tables\Actions\Action::make('download')
                     ->label(__('actions.download'))
                     ->action(function ($record) {
@@ -98,7 +78,7 @@ class DocumentsRelationManager extends RelationManager
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->url(fn (): string => DocumentResource::getUrl('create')),
             ]);
     }
 }
